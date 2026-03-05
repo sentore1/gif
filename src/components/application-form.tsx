@@ -188,20 +188,21 @@ export default function ApplicationForm() {
 
       setApplicationId(data.id);
       
-      // Send email notification
-      await fetch('/api/send-application', {
+      // Send email notification (non-blocking)
+      fetch('/api/send-application', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
           applicationId: data.id,
         }),
-      });
+      }).catch(err => console.error('Email notification failed:', err));
       
       setIsSuccess(true);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error submitting application:", error);
-      alert("There was an error submitting your application. Please try again.");
+      const errorMessage = error?.message || error?.error_description || "There was an error submitting your application. Please try again.";
+      alert(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
@@ -471,11 +472,7 @@ export default function ApplicationForm() {
                 <Label className="mb-4 block">
                   Select Program <span className="text-red-500">*</span>
                 </Label>
-                <RadioGroup
-                  value={formData.program}
-                  onValueChange={(value) => updateFormData("program", value)}
-                  className="space-y-3"
-                >
+                <div className="space-y-3">
                   {programs.map((program) => (
                     <div
                       key={program.id}
@@ -486,25 +483,26 @@ export default function ApplicationForm() {
                       }`}
                       onClick={() => updateFormData("program", program.id)}
                     >
-                      <RadioGroupItem
-                        value={program.id}
-                        id={program.id}
-                        className="mt-1"
-                      />
+                      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center mt-0.5 ${
+                        formData.program === program.id
+                          ? "border-navy bg-navy"
+                          : "border-[#E4E7EB]"
+                      }`}>
+                        {formData.program === program.id && (
+                          <Check className="w-3 h-3 text-white" />
+                        )}
+                      </div>
                       <div className="ml-3">
-                        <Label
-                          htmlFor={program.id}
-                          className="font-semibold text-navy cursor-pointer"
-                        >
+                        <p className="font-semibold text-navy">
                           {program.name}
-                        </Label>
+                        </p>
                         <p className="text-sm text-[#5F6B7A] mt-1">
                           {program.description}
                         </p>
                       </div>
                     </div>
                   ))}
-                </RadioGroup>
+                </div>
                 {errors.program && (
                   <p className="text-red-500 text-sm mt-2">{errors.program}</p>
                 )}
@@ -514,58 +512,40 @@ export default function ApplicationForm() {
                 <Label className="mb-4 block">
                   Program Duration <span className="text-red-500">*</span>
                 </Label>
-                <RadioGroup
-                  value={formData.duration}
-                  onValueChange={(value) => updateFormData("duration", value)}
-                  className="flex gap-4"
-                >
+                <div className="flex gap-4">
                   <div
-                    className={`flex-1 p-4 border-2 rounded-xl cursor-pointer transition-all text-center ${
+                    className={`flex-1 p-4 border-2 rounded-xl cursor-pointer transition-all text-center relative ${
                       formData.duration === "three_months"
                         ? "border-navy bg-navy/5"
                         : "border-[#E4E7EB] hover:border-navy/30"
                     }`}
                     onClick={() => updateFormData("duration", "three_months")}
                   >
-                    <RadioGroupItem
-                      value="three_months"
-                      id="three_months"
-                      className="sr-only"
-                    />
-                    <Label
-                      htmlFor="three_months"
-                      className="font-semibold text-navy cursor-pointer"
-                    >
-                      Three Months
-                    </Label>
-                    <p className="text-sm text-[#5F6B7A] mt-1">
-                      Intensive program
-                    </p>
+                    {formData.duration === "three_months" && (
+                      <div className="absolute top-3 right-3 w-5 h-5 rounded-full bg-navy flex items-center justify-center">
+                        <Check className="w-3 h-3 text-white" />
+                      </div>
+                    )}
+                    <p className="font-semibold text-navy">Three Months</p>
+                    <p className="text-sm text-[#5F6B7A] mt-1">Intensive program</p>
                   </div>
                   <div
-                    className={`flex-1 p-4 border-2 rounded-xl cursor-pointer transition-all text-center ${
+                    className={`flex-1 p-4 border-2 rounded-xl cursor-pointer transition-all text-center relative ${
                       formData.duration === "six_months"
                         ? "border-navy bg-navy/5"
                         : "border-[#E4E7EB] hover:border-navy/30"
                     }`}
                     onClick={() => updateFormData("duration", "six_months")}
                   >
-                    <RadioGroupItem
-                      value="six_months"
-                      id="six_months"
-                      className="sr-only"
-                    />
-                    <Label
-                      htmlFor="six_months"
-                      className="font-semibold text-navy cursor-pointer"
-                    >
-                      Six Months
-                    </Label>
-                    <p className="text-sm text-[#5F6B7A] mt-1">
-                      Comprehensive program
-                    </p>
+                    {formData.duration === "six_months" && (
+                      <div className="absolute top-3 right-3 w-5 h-5 rounded-full bg-navy flex items-center justify-center">
+                        <Check className="w-3 h-3 text-white" />
+                      </div>
+                    )}
+                    <p className="font-semibold text-navy">Six Months</p>
+                    <p className="text-sm text-[#5F6B7A] mt-1">Comprehensive program</p>
                   </div>
-                </RadioGroup>
+                </div>
                 {errors.duration && (
                   <p className="text-red-500 text-sm mt-2">{errors.duration}</p>
                 )}
