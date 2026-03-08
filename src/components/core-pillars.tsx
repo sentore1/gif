@@ -38,15 +38,15 @@ export default function CorePillars() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1B3A5F] mb-6">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1B3A5F] mb-6">
             Our Training Model
           </h2>
-          <p className="text-xl text-[#5F6B7A] max-w-3xl mx-auto">
+          <p className="text-lg text-[#5F6B7A] max-w-3xl mx-auto">
             Professional programs combining intensive training with hands-on production experience and international collaboration.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 mb-12">
           {pillars.map((pillar, index) => (
             <motion.div
               key={pillar.title}
@@ -60,13 +60,32 @@ export default function CorePillars() {
                 <div className="w-8 h-8 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <pillar.icon className="w-4 h-4 text-white" />
                 </div>
-                <h3 className="font-display text-2xl font-bold mb-4">
+                <h3 className="font-display text-xl font-bold mb-4">
                   {pillar.title}
                 </h3>
                 <p className="text-white/80 leading-relaxed">
                   {pillar.description}
                 </p>
               </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {[
+            { src: "/images/00942902db3f9d365917f75b04c55d36.jpg", alt: "Training" },
+            { src: "/images/0744b3b781b549979fb1d65dd35225df.jpg", alt: "Production" },
+            { src: "/images/356aa58cd77b41182782d2823b87104c.jpg", alt: "Collaboration" },
+          ].map((img, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              className="relative h-64 rounded-2xl overflow-hidden"
+            >
+              <Image src={img.src} alt={img.alt} fill className="object-cover" />
             </motion.div>
           ))}
         </div>

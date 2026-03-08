@@ -4,12 +4,12 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 const images = [
-  { src: "/117797.jpg", alt: "Film Training" },
-  { src: "/118346.jpg", alt: "Production" },
-  { src: "/119111.jpg", alt: "Collaboration" },
-  { src: "/2150720572.jpg", alt: "Industry" },
-  { src: "/2150720591.jpg", alt: "Screen Performance" },
-  { src: "/2150960339.jpg", alt: "Professional Training" },
+  { src: "/images/00942902db3f9d365917f75b04c55d36.jpg", alt: "Film Training" },
+  { src: "/images/0744b3b781b549979fb1d65dd35225df.jpg", alt: "Production" },
+  { src: "/images/0f7693c39d4c17c48b42351d089ca335.jpg", alt: "Collaboration" },
+  { src: "/images/356aa58cd77b41182782d2823b87104c.jpg", alt: "Industry" },
+  { src: "/images/3c7bfd5eae2c9f1641bb8dbbb993f1a7.jpg", alt: "Screen Performance" },
+  { src: "/images/4908f9216960bde491d77c1c3c99f571.jpg", alt: "Professional Training" },
 ];
 
 export default function ImageShowcase() {
@@ -23,10 +23,10 @@ export default function ImageShowcase() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1B3A5F] mb-6">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1B3A5F] mb-6">
             Experience GFI
           </h2>
-          <p className="text-xl text-[#5F6B7A] max-w-3xl mx-auto">
+          <p className="text-lg text-[#5F6B7A] max-w-3xl mx-auto">
             Discover our professional training environment and international collaboration spaces.
           </p>
         </motion.div>
@@ -48,7 +48,7 @@ export default function ImageShowcase() {
                 className="object-cover group-hover:scale-110 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#1B3A5F]/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                <p className="text-white font-semibold text-lg">{image.alt}</p>
+                <p className="text-white font-semibold text-base">{image.alt}</p>
               </div>
             </motion.div>
           ))}

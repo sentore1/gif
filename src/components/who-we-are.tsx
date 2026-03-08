@@ -33,11 +33,11 @@ export default function WhoWeAre() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1B3A5F] mb-6">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1B3A5F] mb-6">
             Who We Are
           </h2>
-          <p className="text-xl sm:text-2xl text-[#1B3A5F]/80 max-w-4xl mx-auto leading-relaxed">
-            GFI is built for emerging and mid-career creatives seeking practical, industry-aligned skills in film and screen production.
+          <p className="text-lg sm:text-xl text-[#1B3A5F]/80 max-w-4xl mx-auto leading-relaxed">
+            Global Film Institute (GFI) provides intensive, industry-driven training for emerging and mid-career creatives, equipping them with practical skills and professional insight to excel in film and screen production and thrive in the global screen industry.
           </p>
         </motion.div>
 
@@ -54,10 +54,10 @@ export default function WhoWeAre() {
               <div className="w-7 h-7 bg-[#1B3A5F]/10 rounded-xl flex items-center justify-center mb-6">
                 <feature.icon className="w-4 h-4 text-[#1B3A5F]" />
               </div>
-              <h3 className="font-display text-xl font-bold text-[#1B3A5F] mb-4">
+              <h3 className="font-display text-lg font-bold text-[#1B3A5F] mb-4">
                 {feature.title}
               </h3>
-              <p className="text-[#5F6B7A] leading-relaxed">
+              <p className="text-sm text-[#5F6B7A] leading-relaxed">
                 {feature.description}
               </p>
             </motion.div>
@@ -78,7 +78,7 @@ export default function WhoWeAre() {
             className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#1B3A5F]/80 to-transparent flex items-end p-12">
-            <p className="text-xl sm:text-2xl text-white leading-relaxed max-w-4xl">
+            <p className="text-lg sm:text-xl text-white leading-relaxed max-w-4xl">
               We function as a <span className="font-semibold">professional training institute</span> and <span className="font-semibold">international film hub</span> designed to accelerate talent, production capacity, and creative industry growth.
             </p>
           </div>

@@ -51,7 +51,7 @@ export default async function ProgramsPage() {
             <div key={index} className="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-all">
               <program.icon className="w-8 h-8 text-[#1B3A5F] mb-6" />
               <h2 className="font-display text-2xl font-bold text-[#1B3A5F] mb-4">{program.title}</h2>
-              <p className="text-[#1B3A5F]/70 leading-relaxed">{program.description}</p>
+              <p className="text-[#1B3A5F]/70 leading-relaxed text-sm">{program.description}</p>
             </div>
           ))}
         </div>

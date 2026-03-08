@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
+import Image from "next/image";
 
 const benefits = [
   "Industry-aligned professional training with direct market application",
@@ -34,30 +35,41 @@ export default function WhyPartner() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
+          <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-6">
             Why Partner With GFI
           </h2>
-          <p className="text-lg text-white/70 max-w-2xl mx-auto font-body">
+          <p className="text-base text-white/70 max-w-2xl mx-auto font-body">
             Join a professional training accelerator, co-production gateway, and creative economy development platform integrated within GIN's capital mobilization ecosystem.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto">
-          {benefits.map((benefit, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="flex items-start gap-4"
-            >
-              <div className="w-3 h-3 bg-white rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <Check className="w-4 h-4 text-[#1B3A5F]" />
-              </div>
-              <p className="text-white/90 font-body">{benefit}</p>
-            </motion.div>
-          ))}
+        <div className="grid md:grid-cols-2 gap-8 mb-12">
+          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+            {benefits.map((benefit, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="flex items-start gap-4"
+              >
+                <div className="w-3 h-3 bg-white rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Check className="w-4 h-4 text-[#1B3A5F]" />
+                </div>
+                <p className="text-white/90 font-body text-sm">{benefit}</p>
+              </motion.div>
+            ))}
+          </div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="relative h-96 rounded-2xl overflow-hidden"
+          >
+            <Image src="/images/6a9b20c6271c7ffb4dbec2ae74c5a208.jpg" alt="Partnership" fill className="object-cover" />
+          </motion.div>
         </div>
       </div>
     </section>

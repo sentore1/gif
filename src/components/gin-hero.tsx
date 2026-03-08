@@ -10,9 +10,9 @@ import { useCallback, useEffect, useState } from "react";
 
 const slides = [
   "/slideimages/image1 (1).JPG",
-  "/slideimages/image1 (2).JPG",
-  "/slideimages/image1 (3).JPG",
-  "/slideimages/image1 (4).JPG",
+  "/slideimages/tertretwe.JPG",
+  "/slideimages/Creative Industries.JPG",
+  "/slideimages/15947.JPG",
 ];
 
 export default function GinHero() {
@@ -32,7 +32,7 @@ export default function GinHero() {
           {slides.map((src, i) => (
             <div key={i} className="flex-[0_0_100%] min-w-0 relative">
               <Image src={src} alt={`Slide ${i + 1}`} fill className="object-cover" priority={i === 0} />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#1B3A5F]/95 via-[#1B3A5F]/80 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#1B3A5F]/70 via-[#1B3A5F]/50 to-transparent" />
             </div>
           ))}
         </div>
@@ -51,24 +51,24 @@ export default function GinHero() {
               animate={{ width: 80 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             />  
-            <h3 className="font-display text-4xl sm:text-4xl lg:text-6xl font-bold text-white mb-12">
+            <h3 className="font-display text-3xl sm:text-3xl lg:text-5xl font-bold text-white mb-12">
               Global Film Institute
             </h3>
             
-            <p className="text-lg text-white/80 mb-12 max-w-2xl leading-relaxed">
+            <p className="text-base text-white/80 mb-12 max-w-2xl leading-relaxed">
               An industry-driven film training and development institute dedicated to preparing professionals for the evolving global screen industry.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/apply">
-                <Button className="bg-white hover:bg-white/90 text-[#1B3A5F] px-8 py-6 text-lg font-semibold group">
-                  Apply Now
+              <Link href="/programs">
+                <Button className="bg-white hover:bg-white/90 text-[#1B3A5F] px-8 py-6 text-base font-semibold group">
+                  Explore Programs
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
-              <Link href="/programs">
-                <Button variant="outline" className="border-7 border-white text-[#1b3a5f] hover:bg-white hover:text-[#1B3A5F] px-8 py-6 text-lg font-semibold">
-                  Explore Programs
+              <Link href="/apply">
+                <Button variant="outline" className="border-7 border-white text-[#1b3a5f] hover:bg-white hover:text-[#1B3A5F] px-8 py-6 text-base font-semibold">
+                  Apply Now
                 </Button>
               </Link>
             </div>

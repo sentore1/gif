@@ -21,7 +21,7 @@ export default function VisionStatement() {
             className="h-1 bg-white mx-auto mb-8"
           />
 
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1B3A5F] leading-tight mb-8">
+          <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1B3A5F] leading-tight mb-8">
             Our Mission
           </h2>
 
@@ -30,7 +30,7 @@ export default function VisionStatement() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-m sm:text-m lg:text-m font-display text-[#1A1D29] leading-relaxed mb-6"
+            className="text-sm sm:text-base lg:text-base font-display text-[#1A1D29] leading-relaxed mb-6"
           >
             To accelerate professional film training and international collaboration that strengthens the creative economy and expands global screen opportunities.
           </motion.p>
@@ -43,7 +43,7 @@ export default function VisionStatement() {
             className="h-1 bg-white mx-auto mb-12"
           />
 
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1B3A5F] leading-tight mb-8">
+          <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1B3A5F] leading-tight mb-8">
             Our Vision
           </h2>
 
@@ -52,12 +52,9 @@ export default function VisionStatement() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-m sm:text-m lg:text-m font-display text-[#1A1D29] leading-relaxed"
+            className="text-sm sm:text-base lg:text-base font-display text-[#1A1D29] leading-relaxed"
           >
-            To become a leading regional film training and international co-production hub recognized for{" "}
-            <span className="text-white">excellence</span>,{" "}
-            <span className="text-white">innovation</span>, and{" "}
-            <span className="text-white">sustainable creative industry impact</span>.
+            To become a leading regional film training and international co-production hub recognized for excellence, innovation, and sustainable creative industry impact.
           </motion.p>
 
           <motion.div

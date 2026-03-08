@@ -139,8 +139,8 @@ export default function ApplicationForm() {
     if (step === 3) {
       if (!formData.reasonToApply.trim())
         newErrors.reasonToApply = "Please provide your reason to apply";
-      if (formData.reasonToApply.trim().split(/\s+/).length < 50)
-        newErrors.reasonToApply = "Please write at least 50 words";
+      if (formData.reasonToApply.trim().length < 20)
+        newErrors.reasonToApply = "Please write at least 20 characters";
     }
 
     setErrors(newErrors);
@@ -215,7 +215,7 @@ export default function ApplicationForm() {
     }
   };
 
-  const wordCount = formData.reasonToApply.trim().split(/\s+/).filter(Boolean).length;
+  const charCount = formData.reasonToApply.trim().length;
 
   if (isSuccess) {
     return (
@@ -583,22 +583,17 @@ export default function ApplicationForm() {
                   className={`min-h-[200px] ${
                     errors.reasonToApply ? "border-red-500" : ""
                   }`}
-                  placeholder="Explain your motivation for applying to this program. Share your goals, aspirations, and how this program will help you achieve them. (200-500 words recommended)"
+                  placeholder="Explain your motivation for applying to this program. (Minimum 20 characters)"
                 />
                 <div className="flex justify-between items-center mt-2">
                   <p
                     className={`text-sm ${
-                      wordCount < 50
+                      charCount < 20
                         ? "text-red-500"
-                        : wordCount > 500
-                        ? "text-orange-500"
                         : "text-green-600"
                     }`}
                   >
-                    {wordCount} words {wordCount < 50 && "(minimum 50 required)"}
-                  </p>
-                  <p className="text-sm text-[#5F6B7A]">
-                    Recommended: 200-500 words
+                    {charCount} characters {charCount < 20 && "(minimum 20 required)"}
                   </p>
                 </div>
                 {errors.reasonToApply && (

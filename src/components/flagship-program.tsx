@@ -8,7 +8,7 @@ import { Button } from "./ui/button";
 const highlights = [
   {
     icon: Film,
-    title: "Acting for Camera for Theater",
+    title: "Acting for Camera and Theater",
     description: "Screen-specific performance training with character development",
   },
   {
@@ -48,11 +48,11 @@ export default function FlagshipProgram() {
             <span className="text-sm font-medium text-white">Flagship Program</span>
           </div>
 
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
             Acting for Film and Theater
           </h2>
 
-          <p className="text-xl text-white/80 max-w-xl mx-auto leading-relaxed">
+          <p className="text-lg text-white/80 max-w-xl mx-auto leading-relaxed">
             GFI's premier screen performance training program, dedicated exclusively to professional acting for the camera. Transform into an industry-ready screen professional.
           </p>
         </motion.div>
@@ -70,7 +70,7 @@ export default function FlagshipProgram() {
               <div className="w-12 h-12  rounded-xl flex items-center justify-center mb-6">
                 <item.icon className="w-4 h-4 text-white" />
               </div>
-              <h3 className="font-display text-lg font-bold mb-2">{item.title}</h3>
+              <h3 className="font-display text-base font-bold mb-2">{item.title}</h3>
               <p className="text-sm text-white/70">{item.description}</p>
             </motion.div>
           ))}
@@ -84,8 +84,8 @@ export default function FlagshipProgram() {
           className="text-center"
         >
           <Link href="/apply">
-            <Button size="lg" className="bg-white hover:bg-white/90 text-[#1B3A5F] px-10 py-7 text-lg font-semibold group">
-              Enroll in AFA
+            <Button size="lg" className="bg-white hover:bg-white/90 text-[#1B3A5F] px-10 py-7 text-base font-semibold group">
+              Apply Now
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>
