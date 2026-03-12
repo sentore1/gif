@@ -10,9 +10,9 @@ import { useCallback, useEffect, useState } from "react";
 
 const slides = [
   "/slideimages/image1 (1).JPG",
-  "/slideimages/tertretwe.JPG",
-  "/slideimages/Creative Industries.JPG",
-  "/slideimages/15947.JPG",
+  "/slideimages/tertretwe.jpg",
+  "/slideimages/Creative Industries.jpg",
+  "/slideimages/15947.jpg",
 ];
 
 export default function GinHero() {
