@@ -43,6 +43,7 @@ export default function GinFooter() {
             <h3 className="font-display font-bold text-m mb-2">Quick Links</h3>
             <ul className="space-y-3">
               <li><Link href="/about" className="text-white/70 hover:text-white transition-colors">About Us</Link></li>
+              <li><Link href="/team" className="text-white/70 hover:text-white transition-colors">Our Team</Link></li>
               <li><Link href="/programs" className="text-white/70 hover:text-white transition-colors">Programs</Link></li>
               <li><Link href="/partnership" className="text-white/70 hover:text-white transition-colors">Partnership</Link></li>
               <li><Link href="/contact" className="text-white/70 hover:text-white transition-colors">Contact</Link></li>

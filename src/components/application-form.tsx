@@ -83,6 +83,7 @@ interface FormData {
   middleName: string;
   dateOfBirth: string;
   idNumber: string;
+  email: string;
   educationLevel: string;
   specialization: string;
   program: string;
@@ -106,6 +107,7 @@ export default function ApplicationForm() {
     middleName: "",
     dateOfBirth: "",
     idNumber: "",
+    email: "",
     educationLevel: "",
     specialization: "",
     program: "",
@@ -125,6 +127,10 @@ export default function ApplicationForm() {
         newErrors.dateOfBirth = "Date of birth is required";
       if (!formData.idNumber.trim())
         newErrors.idNumber = "ID number is required";
+      if (!formData.email.trim())
+        newErrors.email = "Email is required";
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
+        newErrors.email = "Invalid email format";
       if (!formData.educationLevel)
         newErrors.educationLevel = "Education level is required";
       if (!formData.specialization.trim())
@@ -172,6 +178,7 @@ export default function ApplicationForm() {
             middle_name: formData.middleName || null,
             date_of_birth: formData.dateOfBirth,
             id_number: formData.idNumber,
+            email: formData.email,
             education_level: formData.educationLevel,
             specialization: formData.specialization,
             program: formData.program,
@@ -188,13 +195,15 @@ export default function ApplicationForm() {
 
       setApplicationId(data.id);
       
-      // Send email notification (non-blocking)
-      fetch('/api/send-application', {
+      // Send confirmation email
+      fetch('/api/send-application-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...formData,
-          applicationId: data.id,
+          email: formData.email,
+          name: `${formData.firstName} ${formData.surname}`,
+          status: 'pending',
+          program: programs.find(p => p.id === formData.program)?.name || formData.program,
         }),
       }).catch(err => console.error('Email notification failed:', err));
       
@@ -395,6 +404,23 @@ export default function ApplicationForm() {
                   />
                   {errors.idNumber && (
                     <p className="text-red-500 text-sm mt-1">{errors.idNumber}</p>
+                  )}
+                </div>
+
+                <div>
+                  <Label htmlFor="email">
+                    Email Address <span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => updateFormData("email", e.target.value)}
+                    className={errors.email ? "border-red-500" : ""}
+                    placeholder="Enter your email address"
+                  />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
                   )}
                 </div>
 
@@ -667,6 +693,10 @@ export default function ApplicationForm() {
                     <div>
                       <span className="text-[#5F6B7A]">ID Number:</span>
                       <p className="font-medium text-navy">{formData.idNumber}</p>
+                    </div>
+                    <div>
+                      <span className="text-[#5F6B7A]">Email:</span>
+                      <p className="font-medium text-navy">{formData.email}</p>
                     </div>
                     <div>
                       <span className="text-[#5F6B7A]">Education Level:</span>

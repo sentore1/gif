@@ -49,7 +49,7 @@ export default function FlagshipProgram() {
           </div>
 
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-            Acting for Film and Theater
+            Acting for Film and Theater performance
           </h2>
 
           <p className="text-lg text-white/80 max-w-xl mx-auto leading-relaxed">

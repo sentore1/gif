@@ -16,6 +16,7 @@ export default function GinNavbar({ user, alwaysLight = false }: GinNavbarProps)
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProgramsOpen, setIsProgramsOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,6 +30,11 @@ export default function GinNavbar({ user, alwaysLight = false }: GinNavbarProps)
     { href: "/about", label: "About" },
     { href: "/partnership", label: "Partnership" },
     { href: "/contact", label: "Contact" },
+  ];
+
+  const aboutDropdown = [
+    { href: "/about", label: "About Us" },
+    { href: "/team", label: "Our Team" },
   ];
 
   const programs = [
@@ -65,17 +71,43 @@ export default function GinNavbar({ user, alwaysLight = false }: GinNavbarProps)
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
-            {navItems.slice(0, 1).map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`text-sm font-medium transition-colors ${
-                  isScrolled || alwaysLight ? "text-[#1B3A5F] hover:text-gold" : "text-white hover:text-gold"
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {/* About Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setIsAboutOpen(true)}
+              onMouseLeave={() => setIsAboutOpen(false)}
+            >
+              <button className={`flex items-center gap-1 text-sm font-medium transition-colors ${
+                isScrolled || alwaysLight ? "text-[#1B3A5F] hover:text-gold" : "text-white hover:text-gold"
+              }`}>
+                About
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform ${
+                    isAboutOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+              <AnimatePresence>
+                {isAboutOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-border py-2"
+                  >
+                    {aboutDropdown.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-[#1B3A5F] hover:bg-secondary hover:text-gold transition-colors"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
 
             {/* Programs Dropdown */}
             <div
@@ -115,7 +147,7 @@ export default function GinNavbar({ user, alwaysLight = false }: GinNavbarProps)
               </AnimatePresence>
             </div>
 
-            {navItems.slice(1).map((item) => (
+            {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -182,6 +214,20 @@ export default function GinNavbar({ user, alwaysLight = false }: GinNavbarProps)
             className="fixed top-20 right-0 bottom-0 w-80 bg-white shadow-xl lg:hidden"
           >
             <div className="flex flex-col p-6 gap-4">
+              <div className="border-b border-border pb-4">
+                <p className="text-sm text-muted-foreground mb-2">About</p>
+                {aboutDropdown.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="block text-[#1B3A5F] hover:text-gold transition-colors py-2 pl-2"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+
               {navItems.map((item) => (
                 <Link
                   key={item.href}

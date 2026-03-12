@@ -15,6 +15,7 @@ import {
   Check,
   X,
   Loader2,
+  Printer,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -60,6 +61,7 @@ interface Application {
   status: string;
   created_at: string;
   updated_at: string;
+  email?: string;
 }
 
 const programNames: Record<string, string> = {
@@ -161,6 +163,21 @@ export default function AdminDashboard() {
         .eq("id", id);
 
       if (error) throw error;
+
+      const app = applications.find((a) => a.id === id);
+      if (app?.email) {
+        await fetch("/api/send-application-email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: app.email,
+            name: `${app.first_name} ${app.surname}`,
+            status,
+            program: programNames[app.program] || app.program,
+          }),
+        });
+      }
+
       fetchApplications();
     } catch (error) {
       console.error("Error updating application:", error);
@@ -180,6 +197,23 @@ export default function AdminDashboard() {
         .in("id", selectedIds);
 
       if (error) throw error;
+
+      const selectedApps = applications.filter((a) => selectedIds.includes(a.id));
+      for (const app of selectedApps) {
+        if (app.email) {
+          await fetch("/api/send-application-email", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              email: app.email,
+              name: `${app.first_name} ${app.surname}`,
+              status,
+              program: programNames[app.program] || app.program,
+            }),
+          });
+        }
+      }
+
       setSelectedIds([]);
       fetchApplications();
     } catch (error) {
@@ -247,6 +281,106 @@ export default function AdminDashboard() {
     setSelectedIds((prev) =>
       prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
     );
+  };
+
+  const printApplication = () => {
+    if (!selectedApplication) return;
+    const printWindow = window.open("", "_blank");
+    if (!printWindow) return;
+
+    const printContent = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>Application - ${selectedApplication.id.slice(0, 8).toUpperCase()}</title>
+          <style>
+            body { font-family: Arial, sans-serif; padding: 40px; max-width: 800px; margin: 0 auto; }
+            h1 { color: #1e3a8a; border-bottom: 2px solid #1e3a8a; padding-bottom: 10px; }
+            h2 { color: #1e3a8a; margin-top: 30px; }
+            .section { margin-bottom: 30px; }
+            .field { margin-bottom: 15px; }
+            .label { font-weight: bold; color: #5F6B7A; }
+            .value { margin-top: 5px; }
+            .status { display: inline-block; padding: 5px 15px; border-radius: 5px; font-weight: bold; }
+            .status-approved { background: #dcfce7; color: #15803d; }
+            .status-rejected { background: #fee2e2; color: #dc2626; }
+            .status-pending { background: #fef3c7; color: #a16207; }
+            @media print { body { padding: 20px; } }
+          </style>
+        </head>
+        <body>
+          <h1>Application Details</h1>
+          <p><strong>Reference ID:</strong> ${selectedApplication.id.slice(0, 8).toUpperCase()}</p>
+          <p><strong>Status:</strong> <span class="status status-${selectedApplication.status}">${selectedApplication.status.toUpperCase()}</span></p>
+          
+          <div class="section">
+            <h2>Personal Information</h2>
+            <div class="field">
+              <div class="label">Full Name</div>
+              <div class="value">${selectedApplication.first_name} ${selectedApplication.middle_name || ""} ${selectedApplication.surname}</div>
+            </div>
+            <div class="field">
+              <div class="label">Date of Birth</div>
+              <div class="value">${new Date(selectedApplication.date_of_birth).toLocaleDateString()}</div>
+            </div>
+            <div class="field">
+              <div class="label">ID Number</div>
+              <div class="value">${selectedApplication.id_number}</div>
+            </div>
+            ${selectedApplication.email ? `
+            <div class="field">
+              <div class="label">Email</div>
+              <div class="value">${selectedApplication.email}</div>
+            </div>
+            ` : ""}
+            <div class="field">
+              <div class="label">Education Level</div>
+              <div class="value">${selectedApplication.education_level}</div>
+            </div>
+            <div class="field">
+              <div class="label">Specialization</div>
+              <div class="value">${selectedApplication.specialization}</div>
+            </div>
+          </div>
+          
+          <div class="section">
+            <h2>Program Selection</h2>
+            <div class="field">
+              <div class="label">Program</div>
+              <div class="value">${programNames[selectedApplication.program] || selectedApplication.program}</div>
+            </div>
+            <div class="field">
+              <div class="label">Duration</div>
+              <div class="value">${durationNames[selectedApplication.duration] || selectedApplication.duration}</div>
+            </div>
+          </div>
+          
+          <div class="section">
+            <h2>Motivation</h2>
+            <div class="value">${selectedApplication.reason_to_apply}</div>
+          </div>
+          
+          <div class="section">
+            <h2>Application Information</h2>
+            <div class="field">
+              <div class="label">Application Date</div>
+              <div class="value">${new Date(selectedApplication.application_date).toLocaleDateString()}</div>
+            </div>
+            <div class="field">
+              <div class="label">Submitted On</div>
+              <div class="value">${new Date(selectedApplication.created_at).toLocaleDateString()}</div>
+            </div>
+          </div>
+          
+          <script>
+            window.onload = function() { window.print(); }
+          </script>
+        </body>
+      </html>
+    `;
+
+    printWindow.document.write(printContent);
+    printWindow.document.close();
   };
 
   const stats = {
@@ -593,7 +727,18 @@ export default function AdminDashboard() {
               <SheetHeader>
                 <SheetTitle className="flex items-center justify-between">
                   <span>Application Details</span>
-                  {getStatusBadge(selectedApplication.status)}
+                  <div className="flex items-center gap-2">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={printApplication}
+                      className="border-navy text-navy"
+                    >
+                      <Printer className="w-4 h-4 mr-1" />
+                      Print
+                    </Button>
+                    {getStatusBadge(selectedApplication.status)}
+                  </div>
                 </SheetTitle>
                 <SheetDescription>
                   Reference: {selectedApplication.id.slice(0, 8).toUpperCase()}
@@ -629,6 +774,14 @@ export default function AdminDashboard() {
                         {selectedApplication.id_number}
                       </p>
                     </div>
+                    {selectedApplication.email && (
+                      <div>
+                        <p className="text-sm text-[#5F6B7A]">Email</p>
+                        <p className="font-medium">
+                          {selectedApplication.email}
+                        </p>
+                      </div>
+                    )}
                     <div>
                       <p className="text-sm text-[#5F6B7A]">Education Level</p>
                       <p className="font-medium">
