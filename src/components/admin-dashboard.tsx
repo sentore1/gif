@@ -62,6 +62,7 @@ interface Application {
   created_at: string;
   updated_at: string;
   email?: string;
+  phone?: string;
 }
 
 const programNames: Record<string, string> = {
@@ -231,6 +232,8 @@ export default function AdminDashboard() {
       "Middle Name",
       "Date of Birth",
       "ID Number",
+      "Email",
+      "Phone",
       "Education Level",
       "Specialization",
       "Program",
@@ -247,6 +250,8 @@ export default function AdminDashboard() {
       app.middle_name || "",
       app.date_of_birth,
       app.id_number,
+      app.email || "",
+      app.phone || "",
       app.education_level,
       app.specialization,
       programNames[app.program] || app.program,
@@ -331,6 +336,12 @@ export default function AdminDashboard() {
             <div class="field">
               <div class="label">Email</div>
               <div class="value">${selectedApplication.email}</div>
+            </div>
+            ` : ""}
+            ${selectedApplication.phone ? `
+            <div class="field">
+              <div class="label">Phone</div>
+              <div class="value">${selectedApplication.phone}</div>
             </div>
             ` : ""}
             <div class="field">
@@ -777,9 +788,13 @@ export default function AdminDashboard() {
                     {selectedApplication.email && (
                       <div>
                         <p className="text-sm text-[#5F6B7A]">Email</p>
-                        <p className="font-medium">
-                          {selectedApplication.email}
-                        </p>
+                        <p className="font-medium">{selectedApplication.email}</p>
+                      </div>
+                    )}
+                    {selectedApplication.phone && (
+                      <div>
+                        <p className="text-sm text-[#5F6B7A]">Phone</p>
+                        <p className="font-medium">{selectedApplication.phone}</p>
                       </div>
                     )}
                     <div>
