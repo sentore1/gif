@@ -4,12 +4,15 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 const images = [
-  { src: "/images/00942902db3f9d365917f75b04c55d36.jpg", alt: "Film Training" },
-  { src: "/images/0744b3b781b549979fb1d65dd35225df.jpg", alt: "Production" },
-  { src: "/images/0f7693c39d4c17c48b42351d089ca335.jpg", alt: "Collaboration" },
-  { src: "/images/356aa58cd77b41182782d2823b87104c.jpg", alt: "Industry" },
-  { src: "/images/3c7bfd5eae2c9f1641bb8dbbb993f1a7.jpg", alt: "Screen Performance" },
-  { src: "/images/4908f9216960bde491d77c1c3c99f571.jpg", alt: "Professional Training" },
+  { src: "/re/Picture1.png", alt: "GFI" },
+  { src: "/re/Pic53ture2.png", alt: "GFI" },
+  { src: "/re/Pictetture2.png", alt: "GFI" },
+  { src: "/re/Pictgture2.png", alt: "GFI" },
+  { src: "/re/Picthrure2.png", alt: "GFI" },
+  { src: "/re/Pictteteure2.png", alt: "GFI" },
+  { src: "/re/Pictteture2.png", alt: "GFI" },
+  { src: "/re/Pictu53re2.png", alt: "GFI" },
+  { src: "/re/Pigegcture2.png", alt: "GFI" },
 ];
 
 export default function ImageShowcase() {
