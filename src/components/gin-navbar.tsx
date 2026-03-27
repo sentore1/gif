@@ -27,7 +27,6 @@ export default function GinNavbar({ user, alwaysLight = false }: GinNavbarProps)
   }, []);
 
   const navItems = [
-    { href: "/about", label: "About" },
     { href: "/partnership", label: "Partnership" },
     { href: "/contact", label: "Contact" },
   ];

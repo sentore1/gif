@@ -10,6 +10,12 @@ const teamMembers = [
     image: "/images/kennedy.png"
   },
   {
+    name: "ANIRBAN MITRA",
+    role: "Engineer | Film Producer | Writer",
+    bio: "Anirban Mitra is an engineer, film producer, and writer based in Rwanda, where he has been living and contributing for the past six years. He is the Founder of IFTR, a special school dedicated to renewable energy and comprehensive technology education, empowering students with practical skills for the future. He also serves as the International Director of Gate Trust, supporting educational and developmental initiatives across communities. With a unique blend of engineering expertise and creative storytelling, Anirban bridges technology, film, and social impact—driving innovation, education, and meaningful change.",
+    image: "/images/Anirban Mitra.png"
+  },
+  {
     name: "KAYUMBA VIANNEY (MANZI)",
     role: "Actor | Director | Acting Instructor",
     bio: "Kayumba Vianney (Manzi) is a Rwandan film actor, director, and acting instructor based in Kigali, with over a decade of experience in the East African film industry. Since beginning his career in 2011, he has worked in film production, documentary storytelling, and commercial video projects, collaborating with both local and international filmmakers. Trained in acting for film and television in Arusha, Tanzania (2014–2015), he specializes in screen performance, character development, and emotional storytelling. In addition to acting, he works as a director and creative mentor, contributing to the growth of Rwanda's emerging film industry through filmmaking, training, and creative leadership.",
@@ -33,15 +39,15 @@ export default function TeamPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
             {teamMembers.map((member) => (
               <div key={member.name} className="bg-white rounded-lg shadow-lg overflow-hidden">
-                <div className="aspect-[4/3] relative bg-gray-200">
+                <div className="aspect-[4/3] relative bg-white">
                   <Image
                     src={member.image}
                     alt={member.name}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                   />
                 </div>
                 <div className="p-6">

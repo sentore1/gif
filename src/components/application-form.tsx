@@ -84,6 +84,7 @@ interface FormData {
   dateOfBirth: string;
   idNumber: string;
   email: string;
+  phone: string;
   educationLevel: string;
   specialization: string;
   program: string;
@@ -108,6 +109,7 @@ export default function ApplicationForm() {
     dateOfBirth: "",
     idNumber: "",
     email: "",
+    phone: "",
     educationLevel: "",
     specialization: "",
     program: "",
@@ -131,6 +133,8 @@ export default function ApplicationForm() {
         newErrors.email = "Email is required";
       else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
         newErrors.email = "Invalid email format";
+      if (!formData.phone.trim())
+        newErrors.phone = "Phone number is required";
       if (!formData.educationLevel)
         newErrors.educationLevel = "Education level is required";
       if (!formData.specialization.trim())
@@ -179,6 +183,7 @@ export default function ApplicationForm() {
             date_of_birth: formData.dateOfBirth,
             id_number: formData.idNumber,
             email: formData.email,
+            phone: formData.phone,
             education_level: formData.educationLevel,
             specialization: formData.specialization,
             program: formData.program,
@@ -421,6 +426,23 @@ export default function ApplicationForm() {
                   />
                   {errors.email && (
                     <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                  )}
+                </div>
+
+                <div>
+                  <Label htmlFor="phone">
+                    Phone Number <span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => updateFormData("phone", e.target.value)}
+                    className={errors.phone ? "border-red-500" : ""}
+                    placeholder="Enter your phone number"
+                  />
+                  {errors.phone && (
+                    <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
                   )}
                 </div>
 
@@ -697,6 +719,10 @@ export default function ApplicationForm() {
                     <div>
                       <span className="text-[#5F6B7A]">Email:</span>
                       <p className="font-medium text-navy">{formData.email}</p>
+                    </div>
+                    <div>
+                      <span className="text-[#5F6B7A]">Phone:</span>
+                      <p className="font-medium text-navy">{formData.phone}</p>
                     </div>
                     <div>
                       <span className="text-[#5F6B7A]">Education Level:</span>

@@ -54,14 +54,20 @@ export async function POST(request: NextRequest) {
       </div>
     `
         : `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #1e3a8a;">Application Received</h2>
-        <p>Dear ${name},</p>
-        <p>Thank you for applying to <strong>${program}</strong> at Global Investment Networks.</p>
-        <p>We have received your application and our team will review it shortly. You will be notified once a decision has been made.</p>
-        <p>If you have any questions, please don't hesitate to contact us.</p>
-        <hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;">
-        <p style="color: #6b7280; font-size: 12px;">Global Investment Networks<br>Email: ${process.env.SMTP_FROM}</p>
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+        <p>Dear Applicant,</p>
+        <p>Thank you for submitting your application to Global Film Institute.</p>
+        <p>We are pleased to confirm that your application has been successfully received and is currently under review by our admissions team.</p>
+        <p>At Global Film Institute, we are committed to nurturing the next generation of filmmakers, storytellers, and creative industry leaders. Your interest in joining our institution is highly valued.</p>
+        <p>Our admissions team will carefully review your application and you will be contacted shortly regarding the next steps, which may include an interview or additional documentation.</p>
+        <p>If you have any questions in the meantime, please feel free to contact our admissions office.</p>
+        <p>We look forward to learning more about your passion for film and storytelling.</p>
+        <br/>
+        <p>Kind regards,</p>
+        <p><strong>Admissions Office</strong><br/>
+        Global Film Institute<br/>
+        Email: <a href="mailto:globalfilminstitute.rwa@gmail.com">globalfilminstitute.rwa@gmail.com</a><br/>
+        Website: <a href="http://www.globalfilminstitute.com">www.globalfilminstitute.com</a></p>
       </div>
     `;
 
