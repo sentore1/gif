@@ -24,10 +24,10 @@ export async function POST(request: NextRequest) {
 
     const subject =
       status === "approved"
-        ? "Application Approved - Global Investment Networks"
+        ? "Application Approved - Global Film Institute"
         : status === "rejected"
-        ? "Application Update - Global Investment Networks"
-        : "Application Received - Global Investment Networks";
+        ? "Application Update - Global Film Institute"
+        : "Application Received - Global Film Institute";
 
     const htmlContent =
       status === "approved"
@@ -36,9 +36,9 @@ export async function POST(request: NextRequest) {
         <h2 style="color: #1e3a8a;">Congratulations ${name}!</h2>
         <p>We are pleased to inform you that your application for <strong>${program}</strong> has been approved.</p>
         <p>Our team will contact you shortly with the next steps and enrollment details.</p>
-        <p>Thank you for choosing Global Investment Networks.</p>
+        <p>Thank you for choosing Global Film Institute.</p>
         <hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;">
-        <p style="color: #6b7280; font-size: 12px;">Global Investment Networks<br>Email: ${process.env.SMTP_FROM}</p>
+        <p style="color: #6b7280; font-size: 12px;">Global Film Institute<br>Email: ${process.env.SMTP_FROM}</p>
       </div>
     `
         : status === "rejected"
@@ -46,11 +46,11 @@ export async function POST(request: NextRequest) {
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #1e3a8a;">Application Update</h2>
         <p>Dear ${name},</p>
-        <p>Thank you for your interest in <strong>${program}</strong> at Global Investment Networks.</p>
+        <p>Thank you for your interest in <strong>${program}</strong> at Global Film Institute.</p>
         <p>After careful review, we regret to inform you that we are unable to proceed with your application at this time.</p>
         <p>We encourage you to apply again in the future and wish you the best in your endeavors.</p>
         <hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;">
-        <p style="color: #6b7280; font-size: 12px;">Global Investment Networks<br>Email: ${process.env.SMTP_FROM}</p>
+        <p style="color: #6b7280; font-size: 12px;">Global Film Institute<br>Email: ${process.env.SMTP_FROM}</p>
       </div>
     `
         : `

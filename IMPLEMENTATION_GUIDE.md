@@ -114,15 +114,15 @@ git push
 The system sends three types of emails:
 
 ### 1. Application Received (Pending)
-- Subject: "Application Received - Global Investment Networks"
+- Subject: "Application Received - Global Film Institute"
 - Content: Confirmation that application was received and is under review
 
 ### 2. Application Approved
-- Subject: "Application Approved - Global Investment Networks"
+- Subject: "Application Approved - Global Film Institute"
 - Content: Congratulations message with next steps
 
 ### 3. Application Rejected
-- Subject: "Application Update - Global Investment Networks"
+- Subject: "Application Update - Global Film Institute"
 - Content: Polite rejection with encouragement to reapply
 
 ## Notes
